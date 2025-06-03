@@ -25,8 +25,8 @@ jobs:
 
       - name: Build the project
         run: npm run build
-        working-directory: mycloud
+        working-directory: myCloud
 
       - name: Run tests
         run: npm run test
-        working-directory: mycloud
+        working-directory: myCloud
