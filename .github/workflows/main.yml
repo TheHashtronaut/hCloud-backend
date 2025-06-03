@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: mycloud
+        working-directory: myCloud
 
       - name: Build the project
         run: npm run build
