@@ -8,11 +8,32 @@ export interface AuthBody {
   password: string;
 }
 
+function isValidEmail(email: string): boolean {
+  return /\S+@\S+\.\S+/.test(email);
+}
+
+function isStrongPassword(password: string): boolean {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
+}
+
 // Register
 router.post('/register', (req: Request<{}, {}, AuthBody>, res: Response): void => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     res.status(400).json({ error: 'Username and password required' });
+    return;
+  }
+
+  if (!isValidEmail(username)) {
+    res.status(400).json({ error: 'Invalid email format' });
+    return;
+  }
+
+  if (!isStrongPassword(password)) {
+    res.status(400).json({
+      error: 'Password must be at least 8 characters and include uppercase, lowercase, number, and special character'
+    });
     return;
   }
 
@@ -28,6 +49,7 @@ router.post('/register', (req: Request<{}, {}, AuthBody>, res: Response): void =
 // Login
 router.post('/login', (req: Request<{}, {}, AuthBody>, res: Response): void => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     res.status(400).json({ error: 'Username and password required' });
     return;

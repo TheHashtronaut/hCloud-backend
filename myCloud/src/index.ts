@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   res.send("Hello from the backend!");
 });
 
-const PORT = 5000;
+const PORT = 5982;
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
